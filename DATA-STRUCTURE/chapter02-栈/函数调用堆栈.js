@@ -1,0 +1,9 @@
+// 使用调试工具看入栈出栈效果
+const func1 = () => {
+  func2();
+};
+const func2 = () => {
+  func3();
+};
+const func3 = () => {};
+func1();
