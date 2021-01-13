@@ -7,6 +7,18 @@
     <h1>x:{{ x }} y:{{ y }}</h1>
     <h1>x:{{ data1.x }} y:{{ data1.y }}</h1>
     <h1 v-if="loading">Loading</h1>
+    <p>{{ error }}</p>
+    <Suspense>
+      <template #default>
+        <div>
+          <DogShow></DogShow>
+          <AsyncShow></AsyncShow>
+        </div>
+      </template>
+      <template #fallback>
+        <h1>loading</h1>
+      </template>
+    </Suspense>
     <img
       v-if="loaded"
       :src="result[0].url"
@@ -27,6 +39,8 @@
 </template>
 
 <script lang="ts">
+import DogShow from "../src/components/DogShow.vue";
+import AsyncShow from "../src/components/AsyncShow.vue";
 import Modal from "../src/components/Modal.vue";
 import useMousePosition from "./hooks/useMousePosition";
 import useURLLoader from "./hooks/useURLLoader";
@@ -40,6 +54,7 @@ import {
   onRenderTriggered,
   watch,
   onUnmounted,
+  onErrorCaptured,
 } from "vue";
 interface DataProps {
   count: number;
@@ -60,7 +75,7 @@ interface CatResult {
 }
 export default {
   name: "App",
-  components: { Modal },
+  components: { Modal, AsyncShow, DogShow },
   // ---vue2.0---
   // data() {
   //   return {
@@ -86,6 +101,11 @@ export default {
     // onRenderTriggered((event) => {
     //   console.log(event);
     // });
+    const error = ref(null);
+    onErrorCaptured((e: any) => {
+      error.value = e;
+      return true;
+    });
     // ref：接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property.value。
     // const count = ref(0);
     // const double = computed(() => {
@@ -166,6 +186,7 @@ export default {
       modalIsOpen,
       openModal,
       onModalClose,
+      error,
     };
   },
 };
