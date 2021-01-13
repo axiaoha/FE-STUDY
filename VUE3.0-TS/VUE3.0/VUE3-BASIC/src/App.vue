@@ -19,12 +19,15 @@
       <li v-for="n in numbers" :key="n">{{ n }}</li>
     </ul>
     <h1>{{ person.name }}</h1>
+    <Modal :isOpen="modalIsOpen" @close-modal="onModalClose">my modal</Modal>
     <button @click="increase">👍+1</button>
     <button @click="updateGreeting">update title</button>
+    <button @click="openModal">open modal</button>
   </div>
 </template>
 
 <script lang="ts">
+import Modal from "../src/components/Modal.vue";
 import useMousePosition from "./hooks/useMousePosition";
 import useURLLoader from "./hooks/useURLLoader";
 import {
@@ -57,6 +60,7 @@ interface CatResult {
 }
 export default {
   name: "App",
+  components: { Modal },
   // ---vue2.0---
   // data() {
   //   return {
@@ -130,6 +134,13 @@ export default {
     data.numbers[0] = 5;
     data.person.name = "zerobeak";
     const refData = toRefs(data);
+    const modalIsOpen = ref(false);
+    const openModal = () => {
+      modalIsOpen.value = true;
+    };
+    const onModalClose = () => {
+      modalIsOpen.value = false;
+    };
     return {
       // ---ref---
       // count,
@@ -152,6 +163,9 @@ export default {
       result,
       loading,
       loaded,
+      modalIsOpen,
+      openModal,
+      onModalClose,
     };
   },
 };
