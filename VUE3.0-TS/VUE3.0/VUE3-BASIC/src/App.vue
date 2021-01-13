@@ -4,6 +4,15 @@
     <!-- <h1>{{ data.count }}</h1>
     <h1>{{ data.double }}</h1> -->
     <!-- <button @click="data.increase">👍+1</button> -->
+    <h1>x:{{ x }} y:{{ y }}</h1>
+    <h1>x:{{ data1.x }} y:{{ data1.y }}</h1>
+    <h1 v-if="loading">Loading</h1>
+    <img
+      v-if="loaded"
+      :src="result[0].url"
+      :width="result[0].width"
+      :height="result[0].height"
+    />
     <h1>{{ count }}</h1>
     <h1>{{ double }}</h1>
     <ul>
@@ -16,6 +25,8 @@
 </template>
 
 <script lang="ts">
+import useMousePosition from "./hooks/useMousePosition";
+import useURLLoader from "./hooks/useURLLoader";
 import {
   ref,
   computed,
@@ -25,6 +36,7 @@ import {
   onUpdated,
   onRenderTriggered,
   watch,
+  onUnmounted,
 } from "vue";
 interface DataProps {
   count: number;
@@ -32,6 +44,16 @@ interface DataProps {
   increase: () => void;
   numbers: number[];
   person: { name?: string };
+}
+interface DogResult {
+  message: string;
+  status: string;
+}
+interface CatResult {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
 }
 export default {
   name: "App",
@@ -51,15 +73,15 @@ export default {
   // 在执行 setup 时尚未创建组件实例，因此在 setup 选项中没有 this。除了 props 之外，无法访问组件中声明的任何属性——本地状态、计算属性或方法。相当于vue2里面的created和beforeCreate
   setup() {
     // 生命周期函数
-    onMounted(() => {
-      console.log("mounted");
-    });
-    onUpdated(() => {
-      console.log("updated");
-    });
-    onRenderTriggered((event) => {
-      console.log(event);
-    });
+    // onMounted(() => {
+    //   console.log("mounted");
+    // });
+    // onUpdated(() => {
+    //   console.log("updated");
+    // });
+    // onRenderTriggered((event) => {
+    //   console.log(event);
+    // });
     // ref：接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property.value。
     // const count = ref(0);
     // const double = computed(() => {
@@ -79,6 +101,14 @@ export default {
       numbers: [0, 1, 2],
       person: { name: "axiaoha" },
     });
+    const { x, y, data: data1 } = useMousePosition();
+    // const { result, loading, loaded } = useURLLoader<DogResult>(
+    //   "https://dog.ceo/api/breeds/image/random"
+    // );
+    const { result, loading, loaded } = useURLLoader<CatResult[]>(
+      "https://api.thecatapi.com/v1/images/search?limit=1"
+    );
+    console.log("data1", data1);
     const greetings = ref("");
     const updateGreeting = () => {
       greetings.value += "Hello!";
@@ -87,6 +117,13 @@ export default {
       console.log("new:", newVal);
       console.log("old:", oldVal);
       document.title = "update" + greetings.value + data.count;
+    });
+    watch(result, () => {
+      // 需要做到运行时检查类型，需要用到泛型
+      if (result.value) {
+        // console.log(result.value.message);
+        console.log(result.value[0].url);
+      }
     });
     // 响应式对象，vue2使用的Object.defineProperty（对于已经创建的实例，Vue 不允许动态添加根级别的响应式 property。但是，可以使用 Vue.set(object, propertyName, value) 方法向嵌套对象添加响应式 property），
     // 而vue3使用的Proxy，解决了vue2的上述问题，完美支持对象和数据的修改操作
@@ -109,6 +146,12 @@ export default {
       ...refData,
       greetings,
       updateGreeting,
+      x,
+      y,
+      data1,
+      result,
+      loading,
+      loaded,
     };
   },
 };
