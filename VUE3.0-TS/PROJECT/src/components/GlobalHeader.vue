@@ -3,17 +3,21 @@
     <a class="navbar-brand" href="#">专栏</a>
     <ul v-if="!user.isLogin" class="list-inline mb-0">
       <li class="list-inline-item">
-        <a href="#" class="btn btn-outline-light my-2">登陆</a>
+        <RouterLink to="/login" class="btn btn-outline-light my-2"
+          >登陆</RouterLink
+        >
       </li>
       <li class="list-inline-item">
-        <a href="#" class="btn btn-outline-light my-2">注册</a>
+        <RouterLink to="/signup" class="btn btn-outline-light my-2"
+          >注册</RouterLink
+        >
       </li>
     </ul>
     <ul v-else class="list-inline mb-0">
       <li class="list-inline-item">
         <DropDown :title="`你好 ${user.name}`">
           <DropDownItem>
-            <a href="#" class="dropdown-item">新建文章</a>
+            <RouterLink to="/create" class="dropdown-item">新建文章</RouterLink>
           </DropDownItem>
           <DropDownItem>
             <a href="#" class="dropdown-item">编辑资料 </a>
