@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>适配器模式</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>顺序：{{message}}</p>
+      <p>逆序：{{reverseMessage}}</p>
+    </div>
+    <!-- http-server -p 8881 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          message: "hello",
+        },
+        computed: {
+          reverseMessage: function () {
+            return this.message.split("").reverse().join("");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
