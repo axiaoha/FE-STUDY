@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/状态模式.js",
+  entry: "./src/others.js",
   output: {
     path: __dirname,
     filename: "./release/bundle.js", // release 会自动创建
