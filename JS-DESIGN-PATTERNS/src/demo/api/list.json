@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "citrus",
+    "price": "600",
+    "discount": 0
+  },
+  {
+    "id": "2",
+    "name": "堀与宫村",
+    "price": "700",
+    "discount": 0
+  },
+  {
+    "id": "3",
+    "name": "咒术回战",
+    "price": "800",
+    "discount": 1
+  },
+  {
+    "id": "4",
+    "name": "博多豚骨拉面团",
+    "price": "900",
+    "discount": 1
+  },
+  {
+    "id": "5",
+    "name": "歌舞伎町夏洛克",
+    "price": "1000",
+    "discount": 1
+  }
+]
