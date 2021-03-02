@@ -255,3 +255,13 @@ module.exports = class extends Generator {
 8. 运行 npm link 将该模块链接到全局范围，使之成为一个全局模块包，让 yeoman 在工作的时候能够找到这个模块
 
 9. 终端进入需要使用该模块的目录，在命令行通过 yo 运行 generator，输入 yo axiaoha-vue![](./img/vue-generator.jpeg)
+
+#### 发布 Generator
+
+generator 本质上就是一个 npm 模块，发布 generator 实际就是发布一个 npm 模块
+
+将模块放到 github 仓库之后，执行
+
+```js
+npm publish
+```
