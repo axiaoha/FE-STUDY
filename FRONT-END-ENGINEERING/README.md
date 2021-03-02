@@ -191,3 +191,67 @@ module.exports = class extends Generator {
 ```
 
 ![接收用户输入数据](./img/接收用户输入数据.png)
+
+#### Vue Generator
+
+1. 新建 generator-axiaoha-vue 目录
+
+2. ```js
+   npm init
+   ```
+
+3. ```js
+   npm add yeoman-generator@4.0
+   ```
+
+4. 新建入口文件 generators/app/index.js
+
+5. 在 templates 目录里面使用 vue-cli 搭建一个基础的 vue 项目，将使用 vue-cli 生成的文件作为模板文件
+
+6. 将模板文件里面用到了项目名称的地方使用模型语言 EJS
+
+7. 编写 index.js
+
+   ```js
+   const Generator = require("yeoman-generator");
+
+   module.exports = class extends Generator {
+     prompting() {
+       return this.prompt([
+         {
+           type: "input",
+           name: "name",
+           message: "Your project name",
+           default: this.name,
+         },
+       ]).then((answers) => {
+         this.answers = answers;
+       });
+     }
+
+     writing() {
+       // 把每一个文件都通过模板转换到目标文件
+       const templates = [
+         "README.md",
+         "babel.config.js",
+         "src/main.js",
+         "src/App.vue",
+         "src/components/HelloWorld.vue",
+         "src/assets/logo.png",
+         "public/index.html",
+         "public/favicon.ico",
+       ];
+       templates.forEach((item) => {
+         this.fs.copyTpl(
+           this.templatePath(item),
+           this.destinationPath(item),
+           this.answers
+         );
+       });
+     }
+   };
+   ```
+
+8. 运行 npm link 将该模块链接到全局范围，使之成为一个全局模块包，让 yeoman 在工作的时候能够找到这个模块
+
+9. 终端进入需要使用该模块的目录，在命令行通过 yo 运行 generator，输入 yo axiaoha-vue![](./img/vue-generator.jpeg)
