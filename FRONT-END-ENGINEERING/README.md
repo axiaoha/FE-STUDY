@@ -265,3 +265,48 @@ generator 本质上就是一个 npm 模块，发布 generator 实际就是发布
 ```js
 npm publish
 ```
+
+### Plop
+
+一个小而美的脚手架工具，有点类似于 sub-generator，主要用于创建项目中的特定运行的文件的工具，一般用于自动化创建项目中的同类型文件。
+
+1. 使用 vue cli 新建一个 vue 项目 plop-vue-app
+
+2. 将 plop 作为 npm 模块安装到开发依赖当中
+
+   ```json
+   npm add plop --dev
+   ```
+
+3. 在项目目录下新建一个plopfile.js文件,编写此文件
+
+4. 在package.json文件的scripts里面新增脚本
+
+   ```json
+   "scripts": {
+      "p": "plop"
+    },
+   ```
+
+5. 在控制台运行
+
+   ```
+   npm run p "生成器名字"
+   or
+   npm run p // 可以自己选择对应的生成器
+   ```
+
+6. 用户数据输入完毕后，在plopfile.js actions配置的路径下会有文件生成（或者其他操作）
+
+**总结**
+
+- 将plop模块作为项目开发依赖安装
+- 在项目根目录下创建一个plopfile.js文件
+- 在plopfile.js文件中定义脚手架任务
+- 编写用于生成特定类型文件的模板
+- 通过plop提供的cli运行脚手架任务
+
+vue项目可以参考：https://github.com/PanJiaChen/vue-element-admin.git
+
+### 脚手架工作原理
+
