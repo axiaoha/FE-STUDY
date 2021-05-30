@@ -1,0 +1,16 @@
+[
+  {
+    "name": "about",
+    "path": "/about",
+    "component": "/Users/hergun/Desktop/resource/FE-STUDY/BIG-FRONT-END/PART03Vue.js 框架源码与进阶/03Vuex数据流管理以及Vue.js服务器端渲染(SSR)/02服务端渲染基础/现代化的服务器端渲染/pages/about.vue",
+    "chunkName": "pages/about",
+    "_name": "_77774fbb"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/hergun/Desktop/resource/FE-STUDY/BIG-FRONT-END/PART03Vue.js 框架源码与进阶/03Vuex数据流管理以及Vue.js服务器端渲染(SSR)/02服务端渲染基础/现代化的服务器端渲染/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_d1a1ab00"
+  }
+]

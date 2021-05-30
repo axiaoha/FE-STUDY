@@ -1,0 +1,7 @@
+{
+  "title": "App",
+  "posts": [
+    { "id": 1, "title": "App1" },
+    { "id": 2, "title": "App2" }
+  ]
+}
