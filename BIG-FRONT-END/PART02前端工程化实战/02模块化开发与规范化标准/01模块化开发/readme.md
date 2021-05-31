@@ -1,4 +1,6 @@
-### 模块化演变过程
+### 模块化
+
+#### 模块化演变过程
 
 - 文件划分方式（完全依靠约定）
   - 污染全局作用域
@@ -7,7 +9,7 @@
 - 命名空间方式（每个模块只暴露一个全局对象，所有模块成员都挂载到这个对象中）
 - IIFE(Immediately-Invoked Function Expression) 立即执行函数为模块化提供私有空间，通过传参确定模块的依赖关系
 
-### 模块化规范
+#### 模块化规范
 
 模块化标准+模块加载器
 
@@ -25,6 +27,17 @@
   - 每个 ESM 模块都是单独的私有作用域
   - ESM 是通过 CORS 去请求外部 JS 模块的
   - ESM 的 script 标签会延迟执行脚本
+
+#### ES Modules in Node.js - 与CommonJS交互
+
+- ES Modules中可以导入CommonJS模块
+- CommonJS中不能导入ES Modules模块
+- CommonJS始终只会导出一个默认成员
+- import不是解构导出对象
+
+#### ES Modules和CommonJS的区别
+
+
 
 ### 常用的模块化打包工具
 
