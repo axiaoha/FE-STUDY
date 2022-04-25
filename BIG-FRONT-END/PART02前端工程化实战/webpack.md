@@ -630,3 +630,8 @@ webpack内置的压缩插件只会压缩js文件，其他文件的压缩需要�
 
 
 
+### 拓展
+
+[webpack配置---实现某文件夹下的文件不打包](https://blog.csdn.net/hfhwfw161226/article/details/96287063)
+
+static目录下的文件不可通过require或者import的方式引入文件，否则该文件就会参与打包。可以通过http请求静态资源的方式
