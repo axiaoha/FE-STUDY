@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 串行
+      function* gen() {
+        var r1 = yield fetch("https://api.github.com/users/github");
+        var r2 = yield fetch("https://api.github.com/users/github/followers");
+        var r3 = yield fetch("https://api.github.com/users/github/repos");
+        console.log([r1.bio, r2[0].login, r3[0].full_name].join("\n"));
+      }
+
+      // var g = gen();
+      // var result1 = g.next();
+      // result1.value
+      //   .then(function (data) {
+      //     return data.json();
+      //   })
+      //   .then(function (data) {
+      //     return g.next(data).value;
+      //   })
+      //   .then(function (data) {
+      //     return data.json();
+      //   })
+      //   .then(function (data) {
+      //     return g.next(data).value;
+      //   })
+      //   .then(function (data) {
+      //     return data.json();
+      //   })
+      //   .then(function (data) {
+      //     g.next(data);
+      //   });
+
+      function run(gen) {
+        const g = gen();
+        function next(value) {
+          const res = g.next(value);
+          if (res.done) return;
+          res.value
+            .then(function (data) {
+              return data.json();
+            })
+            .then(next);
+        }
+        next();
+      }
+      run(gen);
+    </script>
+  </body>
+</html>

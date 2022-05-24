@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function loadData(urls) {
+        // 并发读取 url
+        const textPromises = urls.map(async (url) => {
+          const response = await fetch(url);
+          return response.text();
+        });
+
+        // 按次序输出
+        for (const textPromise of textPromises) {
+          console.log(await textPromise);
+        }
+      }
+      loadData([
+        "https://api.github.com/users/github",
+        "https://api.github.com/users/github/followers",
+        "https://api.github.com/users/danielguillan/repos",
+      ]);
+    </script>
+  </body>
+</html>

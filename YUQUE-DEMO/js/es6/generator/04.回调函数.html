@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fetchData(url) {
+        return function (cb) {
+          setTimeout(function () {
+            cb({ status: 200, data: url });
+          }, 1000);
+        };
+      }
+      function* gen() {
+        var r1 = yield fetchData("https://api.github.com/users/github");
+        var r2 = yield fetchData(
+          "https://api.github.com/users/github/followers"
+        );
+        console.log([r1.data, r2.data].join("\n"));
+      }
+      function run(gen) {
+        var g = gen();
+        function next(data) {
+          var result = g.next(data);
+          if (result.done) return;
+          result.value(next);
+        }
+        next();
+      }
+      run(gen);
+    </script>
+  </body>
+</html>
