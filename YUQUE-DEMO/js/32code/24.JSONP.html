@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test-jsonp"></div>
+    <script src="./24.JSONP.js"></script>
+    <script>
+      function output(data) {
+        var p = document.getElementById("test-jsonp");
+        p.innerHTML =
+          "当前价格：" +
+          data["0000001"].name +
+          ": " +
+          data["0000001"].price +
+          "；" +
+          data["1399001"].name +
+          ": " +
+          data["1399001"].price;
+      }
+      jsonp({
+        url: "http://api.money.126.net/data/feed/0000001,1399001",
+        params: {},
+        callbackName: "refreshPrice",
+      }).then((res) => {
+        console.log("res", res);
+        output(res);
+      });
+    </script>
+  </body>
+</html>

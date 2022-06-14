@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      选择当前城市:
+      <select name="" id="city_select">
+        <option value="London">London</option>
+        <option value="Moscow">Moscow</option>
+        <option value="Kiev">Kiev</option>
+        <option value="Minsk">Minsk</option>
+      </select>
+    </p>
+    <button type="submit" onclick="getWeather()">查询</button>
+    <p id="weatherInfo"></p>
+    <script src="./25.ajax.js"></script>
+    <script>
+      function getWeather() {
+        let city = document.getElementById("city_select");
+        let newURL = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&APPID=675a6f1f0e4160179b80a9177f7c345d`;
+        ajax({
+          url: newURL,
+          method: "GET",
+        })
+          .then((data) => {
+            let weather = document.getElementById("weatherInfo");
+            let weatherInfo = JSON.parse(data);
+            console.log("data", data, weatherInfo);
+            if (weatherInfo.cod === 200) {
+              weather.innerHTML =
+                " " +
+                Math.round((weatherInfo.main.temp - 273.15) * 10) / 10 +
+                "&deg;C" +
+                `<p>Wind speed: ${weatherInfo.wind.speed} m/sec</p>` +
+                `<p>Weather description: ${weatherInfo.weather[0].description}</p>`;
+            } else {
+              weather.innerText = weatherInfo.msg;
+            }
+          })
+          .catch((err) => console.error("Error:", err));
+      }
+    </script>
+  </body>
+</html>

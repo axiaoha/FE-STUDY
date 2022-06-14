@@ -87,6 +87,13 @@ class MyPromise {
 
 function resolvePromise(promise, x, resolve, reject) {
   // 如果相等，说明return的是自己，抛出类型错误并返回
+  // const promise = new Promise((resolve, reject) => {
+  //   resolve(100)
+  // })
+  // const p1 = promise.then(value => {
+  //   console.log(value)
+  //   return p1
+  // })
   if (promise === x) {
     reject(new TypeError("Chaining cycle detected for promise #<Promise>"));
   }

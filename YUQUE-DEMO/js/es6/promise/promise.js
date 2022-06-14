@@ -32,3 +32,15 @@ const p1 = promise.then((value) => {
   return p1;
 });
 // [TypeError: Chaining cycle detected for promise #<Promise>]
+
+new Promise((resolve, reject) => {
+  resolve(100);
+})
+  .then((res) => {
+    console.log("1", res);
+    return 10;
+  })
+  .then((res) => {
+    console.log("2", res);
+    return 10;
+  });
