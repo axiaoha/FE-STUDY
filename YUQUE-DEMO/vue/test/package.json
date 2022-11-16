@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "node process.argv.js",
+    "build:argv": "node process.argv.js -- --1,2",
+    "build:npm-argv": "npm run build -- --1,2"
+  }
+}
