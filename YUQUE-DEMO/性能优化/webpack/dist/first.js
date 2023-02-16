@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("this is fn"),console.log("first  common file")})();
