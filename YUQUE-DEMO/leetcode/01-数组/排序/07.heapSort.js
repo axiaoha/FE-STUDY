@@ -9,17 +9,20 @@
 // 右子节点=2*父节点的下标+2
 // 第k层的最后一个节点下标为：2^k - 1 - 1
 // 第k层的第1个节点下标为：2^(k - 1) - 1
-// 第1个非叶子节点下标为：Math.floor(总节点数 / 2 - 1)
+// 最后一个非叶子节点下标为：Math.floor(总节点数 / 2 - 1)
+//【可以根据最后一个节点的下标为(总节点数 - 1)算出其父节点的下标即(Math.floor((总节点数 - 1) / 2))】
 
 function heapSort(arr) {
-  // 初始化大顶堆，从第一个非叶子结点开始
+  // 初始化大顶堆，从最后一个非叶子结点开始
   for (let i = Math.floor(arr.length / 2 - 1); i >= 0; i--) {
     heapify(arr, i, arr.length);
   }
+  console.log("log", arr);
   // 排序，每次都找出当前的最大值
   for (let i = arr.length - 1; i > 0; i--) {
     swap(arr, 0, i);
     heapify(arr, 0, i);
+    console.log("log1", arr);
   }
   return arr;
 }
