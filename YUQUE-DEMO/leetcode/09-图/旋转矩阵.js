@@ -23,6 +23,15 @@
 //   [15,14,12,16]
 // ],
 
+// https://leetcode.cn/problems/rotate-matrix-lcci/solutions/189835/xuan-zhuan-ju-zhen-by-leetcode-solution/
+// 如果使用辅助函数：
+// 将图像旋转 90 度之后，
+// 对于矩阵中第 i 行的第 j 个元素，在旋转后，它出现在倒数第 i 列的第 j 个位置
+// 即new_matrix[col][n−row−1] = matrix[row][col]
+// 如果使用翻转代替旋转：
+// matrix[row][col] 经过对角线翻转得到 matrix[col][row] 经过中线左右翻转得到 matrix[col][n−row−1]
+// 和使用辅助函数的关键等式是一致的
+
 // 原地旋转输入矩阵，使其变为:
 // [
 //   [15,13, 2, 5],
